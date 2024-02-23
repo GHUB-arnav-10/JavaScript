@@ -5,9 +5,9 @@ const port = 3005;
 const {connection} = require("./db/db_config");
 
 app.get("/",(req,res)=>{
-  let userInput = req.query.language
-  connection.query(`SELECT * FROM movie_data WHERE language = ?`,
-  [userInput],
+  let userInput = req.query.term
+  connection.query(`SELECT * FROM movie_data WHERE title LIKE ?`,
+  [`${userInput}%`],
   (err,results)=>{
     if(err){
       console.log(`Error in query!`)
